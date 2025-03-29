@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frase del Día</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?galaxy,night') no-repeat center center/cover;
+            color: white;
+            font-family: 'Indie Flower', cursive;
+            text-align: center;
+        }
+        #container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 80%;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="quote">Cargando frase...</h1>
+    </div>
+    <script>
+        async function fetchQuote() {
+            try {
+                const response = await fetch("TU_URL_AQUI");
+                const data = await response.json();
+                document.getElementById("quote").innerText = `"${data.frase}" - ${data.autor}`;
+            } catch (error) {
+                document.getElementById("quote").innerText = "No se pudo cargar la frase.";
+            }
+        }
+        fetchQuote();
+    </script>
+</body>
+</html>
