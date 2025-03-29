@@ -5,41 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frase del Día</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?galaxy,night') no-repeat center center/cover;
-            color: white;
-            font-family: 'Indie Flower', cursive;
+            background: #D6EAF8; /* Azul pastel suave */
+            color: #333;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
+            overflow: hidden; /* Oculta la barra de desplazamiento */
         }
+
         #container {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
+            background: white;
+            padding: 25px;
             border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 80%;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
         }
+
         h1 {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 10px;
+            color: #566573;
         }
     </style>
 </head>
 <body>
     <div id="container">
         <h1 id="quote">Cargando frase...</h1>
+        <p id="author"></p>
     </div>
     <script>
         async function fetchQuote() {
             try {
                 const response = await fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLgBq6pzMrMxvoYcizyg4H_4qnlOb1cffJx3jTttmLG6MaqnOoaGoUE2WyhMN4_zH44N_PgG3M3foZav9Bve4xsIwf_WDZxvjvAljEEbW7y5ln_-CSQaKQn3N2t4TrYJvwEppIJpkdvy3rfj7z9NsIbG6XASXWJop2bbGG-KcJqMOWXmxnPH2B58JqhXE8KZ_vGJI0r3Vu2KA0IKpngKC2ndAIJ8PWjjf1dHl1omOOXJD4ngUZNAGq__i0NONDje75bJM2eMeCgs6dyTZTlU5Q57_MBQuQ&lib=MNgoJSDqU5C4PCPsT-0eDB7iujGdHaVV5");
                 const data = await response.json();
-                document.getElementById("quote").innerText = `"${data.frase}" - ${data.autor}`;
+                document.getElementById("quote").innerText = `"${data.frase}"`;
+                document.getElementById("author").innerText = `- ${data.autor}`;
             } catch (error) {
                 document.getElementById("quote").innerText = "No se pudo cargar la frase.";
+                document.getElementById("author").innerText = "";
             }
         }
         fetchQuote();
